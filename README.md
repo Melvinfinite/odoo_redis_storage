@@ -1,0 +1,1 @@
+# odoo_redis_storage
