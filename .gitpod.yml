@@ -1,5 +1,5 @@
 tasks:
   - init: odoo-bin -r gitpod --addons-path=/workspace -d template1 -i base,odoo_redis_storage -D /workspace/.odoo --stop-after-init
-    command: odoo-bin -r gitpod --addons-path=/workspace -d template1 --dev all -D /workspace/.odoo
+    command: odoo-bin -r gitpod --addons-path=/workspace -d template1 -i base,odoo_redis_storage --dev all -D /workspace/.odoo
 image:
   file: .gitpod.Dockerfile
