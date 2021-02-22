@@ -15,6 +15,7 @@ hostPort = 26379
 
 # Get sentinel
 sentinel_service = Sentinel([(hostName, hostPort)], socket_timeout=0.1)
+init_master = sentinel_service.discover_master('mymaster')
 
 # Class RedisSessionStore inherits from SessionStore from werkzeug
 # Methods are overwritten by using redis-py
@@ -34,7 +35,7 @@ class RedisSessionStore(werkzeug.contrib.sessions.SessionStore):
         super(RedisSessionStore, self).__init__(*args, **kwargs)
         self.expire = kwargs.get('expire', session_duration)
         # Connect to available redis-master
-        self._connect_to_redis()
+        self.redis = redis.Redis(host = init_master[0], port = init_master[1])
 
     # Returns session key
     def _get_key(self, sid):
